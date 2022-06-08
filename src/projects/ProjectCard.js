@@ -1,15 +1,16 @@
-import { Project } from './Project';
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Project } from "./Project";
+import React from "react";
+import PropTypes from "prop-types";
 
 function formatDescription(description) {
-  return description.substring(0, 60) + '...';
+  return description.substring(0, 60) + "...";
 }
 
 function ProjectCard(props) {
-  const { project } = props;
+  const { project, onEdit } = props;
+
   const handleEditClick = (projectBeingEdited) => {
-      console.log(projectBeingEdited);
+    onEdit(projectBeingEdited);
   };
 
   return (
@@ -21,10 +22,10 @@ function ProjectCard(props) {
         </h5>
         <p>{formatDescription(project.description)}</p>
         <p>Budget : {project.budget.toLocaleString()}</p>
-<button className="bordered" onClick={() => handleEditClick(project)}>
-  <span className="icon-edit "></span>
-  Edit
-</button>
+        <button className="bordered" onClick={() => handleEditClick(project)}>
+          <span className="icon-edit "></span>
+          Edit
+        </button>
       </section>
     </div>
   );
@@ -32,6 +33,7 @@ function ProjectCard(props) {
 
 ProjectCard.propTypes = {
   project: PropTypes.instanceOf(Project).isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default ProjectCard;
